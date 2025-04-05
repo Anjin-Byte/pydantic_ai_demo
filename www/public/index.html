@@ -7,10 +7,21 @@
     <link rel="icon" type="image/x-icon" href="favicon-16x16.png">
 
     <style>
-        canvas {
-            width: 1100px;
-            height: 1500px;
-            display: block;
+        /* Style definitions for nodes and links */
+        .node circle {
+            fill: #fff;
+            stroke: steelblue;
+            stroke-width: 3px;
+        }
+
+        .node text {
+            font: 12px sans-serif;
+        }
+
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 2px;
         }
     </style>
 </head>
@@ -20,7 +31,8 @@
         This page contains 3D.js and JavaScript content. Please enable JavaScript in your browser.
     </noscript>
     <!-- <canvas id="canvas"></canvas> -->
-    <p>Hello</p>
+    <!-- SVG container for our visualization -->
+    <svg width="960" height="600"></svg>
     <!-- The bundled JS will be injected automatically -->
     <!-- https://github.com/Anjin-Byte/pydantic_ai_demo.git -->
 </body>

@@ -9,8 +9,8 @@ module.exports = (env, argv) => {
         output: {
             path: path.resolve(__dirname, 'dist'),
             filename: 'bundle.[contenthash].js',
-            publicPath: '',  // ensures relative paths for GitHub Pages
-            clean: true, // This tells webpack to clear the dist folder before each build.
+            publicPath: '',
+            clean: true,
         },
         devServer: {
             static: path.resolve(__dirname, 'dist'),
@@ -28,7 +28,7 @@ module.exports = (env, argv) => {
                     {
                         from: 'public',
                         globOptions: {
-                            ignore: ['**/index.html', '**/.DS_Store'], // ignore index.html to avoid conflict
+                            ignore: ['**/index.html', '**/.DS_Store'],
                         },
                     },
                 ],
@@ -36,7 +36,6 @@ module.exports = (env, argv) => {
         ],
         module: {
             rules: [
-                // Add any loaders here (e.g., for CSS or images) if needed
             ],
         },
     };
