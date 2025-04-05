@@ -4,6 +4,7 @@ from pydantic_ai import Agent
 from pydantic import BaseModel
 from anytree import Node, RenderTree
 from anytree.exporter import JsonExporter
+from anytree.render import ContRoundStyle
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -51,7 +52,8 @@ subdivision_agent: Agent[str, Simple] = Agent(
     system_prompt=(
         "You are an efficient day-planner. For a given task, determine if it can be accomplished in one day. "
         "If it can, respond with a single task that is exactly 'NO SUBDIVISION'. "
-        "'reasoning' summary explaining why no subdivision is needed. "
+        #"Do not be timid in ceasing to subdivide further. If you lack information or knowledge of context to know how long something will take, consider no subdivision." #experimental
+        "'reasoning' summary explaining why no subdivision is needed. If you lack information or knowledge of context to know how long something will take, take special care to explain this point."
         "If it cannot, break the task into exactly 2 sub-tasks, each of which can be accomplished in one day. "
         "Provide the result as a JSON object with the key 'tasks' mapping to a list of sub-task objects, "
         "each having 'taskNum' and 'task'. "
@@ -98,7 +100,7 @@ for task in result.data.tasks:
     task_node = TaskNode(task.task, reasoning=task.reasoning, parent=root)
     subdivide_node(task_node, depth=0, max_depth=3)
 
-for pre, fill, node in RenderTree(root):
+for pre, fill, node in RenderTree(root, style=ContRoundStyle()):
     print(f"{pre}{node.name} | Reason: {node.reasoning}")
 
 exporter = JsonExporter(indent=2, sort_keys=True)
