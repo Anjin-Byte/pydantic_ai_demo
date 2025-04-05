@@ -6,10 +6,14 @@ from pydantic import BaseModel
 from anytree import Node, RenderTree
 from anytree.exporter import JsonExporter
 
+
+from dotenv import load_dotenv
+load_dotenv()
+import os
 model = OpenAIModel(
     "gpt-4o",
     provider=OpenAIProvider(
-        api_key=""
+        api_key=os.getenv("OPENAI_API_KEY")
     ),
 )
 

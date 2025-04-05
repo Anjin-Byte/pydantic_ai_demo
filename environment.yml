@@ -1,4 +1,4 @@
-name: birthday-party-planner
+name: pydantic_ai_demo
 channels:
   - conda-forge
 dependencies:
@@ -8,3 +8,4 @@ dependencies:
       - pydantic-ai
       - pydantic
       - anytree
+      - python-dotenv

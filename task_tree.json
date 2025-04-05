@@ -7,76 +7,58 @@
             {
               "children": [
                 {
-                  "name": "Determine coordinates of the location",
-                  "reasoning": "Initial step to locate climate zone."
+                  "name": "Research recent popular party themes through event planning websites.",
+                  "reasoning": "Focuses on gathering diverse and current themes."
                 },
                 {
-                  "name": "Check climate zone based on coordinates",
-                  "reasoning": "Climate zones are determined by geographic location."
+                  "name": "Compile a list of top themes from the past year by analyzing social media party trends.",
+                  "reasoning": "Ensures the themes reflect current societal interests."
                 }
               ],
-              "name": "Identify the climate zone for the location.",
-              "reasoning": "Essential for selecting suitable plants."
+              "name": "Research popular party themes.",
+              "reasoning": "To identify current trends and options."
             },
             {
               "children": [
                 {
-                  "name": "NO SUBDIVISION",
-                  "reasoning": "Simple research task fulfilling the requirements."
+                  "name": "Research audience preferences",
+                  "reasoning": "Audience preferences impact suitable theme choice."
+                },
+                {
+                  "name": "Analyze budget constraints",
+                  "reasoning": "Budget limitations guide feasible theme options."
                 }
               ],
-              "name": "Compile a list of plants suitable for that climate zone.",
-              "reasoning": "Ensures plants will thrive in the environment."
+              "name": "Select a theme that fits the budget and audience.",
+              "reasoning": "To ensure the theme is feasible and appropriate."
             }
           ],
-          "name": "Research climate-appropriate plants",
-          "reasoning": "Identify plants that thrive in the local climate."
+          "name": "Decide on the party theme",
+          "reasoning": "Choosing a theme guides all other decisions."
         },
         {
           "children": [
             {
               "children": [
                 {
-                  "name": "Research plant species and their specific requirements for sunlight, water, soil, and climate.",
-                  "reasoning": "Complex task requiring diverse data analysis."
+                  "name": "Determine the number of guests",
+                  "reasoning": "Number of guests affects party size calculation."
                 },
                 {
-                  "name": "Summarize findings for plant species requirements for sunlight, water, soil, and climate.",
-                  "reasoning": "Need to distill information from research."
+                  "name": "Assess venue capacity",
+                  "reasoning": "Venue capacity limits party size."
                 }
               ],
-              "name": "Research plant species and their specific requirements for sunlight, water, soil, and climate.",
-              "reasoning": "Gather detailed care guidelines for accurate information."
-            },
-            {
-              "children": [
-                {
-                  "name": "Cactus care: Provide bright light, water sparingly only when soil is dry, and ensure good drainage.",
-                  "reasoning": "Care is simple and doesn't require subdivision."
-                },
-                {
-                  "name": "Fern care: Keep in indirect sunlight, maintain moist soil, and high humidity.",
-                  "reasoning": "Each care instruction is straightforward and doesn't need subdivision."
-                },
-                {
-                  "name": "Orchid care: Place in bright, indirect light, water every 7-10 days, and ensure a well-draining potting mix.",
-                  "reasoning": "Instructions can be handled together in one care routine."
-                },
-                {
-                  "name": "Bonsai care: Water regularly but do not overwater, prune to maintain shape, and provide enough sunlight.",
-                  "reasoning": "Simple set of tasks that can be done in one effort."
-                }
-              ],
-              "name": "Summarize the care instructions into a simple guide for each plant.",
-              "reasoning": "Consolidate data for easy reference and action."
+              "name": "Determine the party size",
+              "reasoning": "Simple task requiring decision-making, no subdivision needed."
             }
           ],
-          "name": "Check plant requirements and care",
-          "reasoning": "Ensure the plants suit the care level you can provide."
+          "name": "Determine the party size",
+          "reasoning": "Party size affects logistics and venue choice."
         }
       ],
-      "name": "Research suitable plants",
-      "reasoning": "Understand which plants and flowers can thrive in your local climate and bloom in time for next June's party."
+      "name": "Decide on the theme and size of the party",
+      "reasoning": "This will help determine the types and amounts of plants needed for the garden, as well as other party requirements."
     },
     {
       "children": [
@@ -85,34 +67,90 @@
             {
               "children": [
                 {
-                  "name": "Collect soil samples from location A.",
-                  "reasoning": "Task divided by location for efficiency."
+                  "name": "Research local climate conditions including temperature, humidity, and precipitation.",
+                  "reasoning": "Local climate data is essential for accurate garden planning."
                 },
                 {
-                  "name": "Collect soil samples from location B.",
-                  "reasoning": "Task divided by location for efficiency."
+                  "name": "Analyze climate impact on plant selection and care.",
+                  "reasoning": "Understanding climate effects aids in choosing appropriate plants."
                 }
               ],
-              "name": "Collect soil samples from multiple locations.",
-              "reasoning": "Different areas may have varied soil characteristics."
+              "name": "Determine the climate for the garden",
+              "reasoning": "Climate research is a separate field than soil."
             },
             {
               "children": [
                 {
-                  "name": "Collect and prepare soil samples.",
-                  "reasoning": "Preparation is the first step before analysis."
+                  "name": "Collect soil samples from different areas of the garden.",
+                  "reasoning": "Different areas may have varying soil types."
                 },
                 {
-                  "name": "Perform pH and nutrient analysis in the lab.",
-                  "reasoning": "Lab analysis cannot proceed without prepared samples."
+                  "name": "Perform a soil test to identify the soil type.",
+                  "reasoning": "Testing is needed to identify soil composition."
                 }
               ],
-              "name": "Analyze soil samples for pH and nutrient levels in a lab.",
-              "reasoning": "Testing requires specific equipment and expertise."
+              "name": "Determine the soil type for the garden",
+              "reasoning": "Soil analysis requires different data than climate."
             }
           ],
-          "name": "Test soil pH and nutrient levels.",
-          "reasoning": "Ensure soil suitability for plants."
+          "name": "Determine the climate and soil type for the garden",
+          "reasoning": "Necessary for selecting compatible plant species."
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "name": "Research global climate patterns and characteristics.",
+                  "reasoning": "Climate research is complex and geographically diverse."
+                },
+                {
+                  "name": "Study specific regional climate variations.",
+                  "reasoning": "Different regions exhibit unique climate traits."
+                }
+              ],
+              "name": "Research climate characteristics.",
+              "reasoning": "Identifying climate specifics is essential first step."
+            },
+            {
+              "children": [
+                {
+                  "name": "Identify soil types in the target location.",
+                  "reasoning": "Soil types vary by location."
+                },
+                {
+                  "name": "List plants compatible with each identified soil type.",
+                  "reasoning": "Different plants thrive in different soils."
+                }
+              ],
+              "name": "Identify soil types and compatible plants.",
+              "reasoning": "Necessary to match plants with the specific soil characteristics."
+            }
+          ],
+          "name": "Research plants that thrive in the identified climate and soil",
+          "reasoning": "To ensure the selected plants will flourish."
+        }
+      ],
+      "name": "Research suitable plants for the garden",
+      "reasoning": "Choose plants that will thrive in your climate and bloom by the time of the party next year."
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "name": "Design the garden layout",
+                  "reasoning": "Straightforward creative task, feasible in one day."
+                }
+              ],
+              "name": "Design the garden layout",
+              "reasoning": "A single conceptual task can be done in a day."
+            }
+          ],
+          "name": "Design the garden layout",
+          "reasoning": "Needs creativity, can be done in one day."
         },
         {
           "children": [
@@ -120,43 +158,155 @@
               "children": [
                 {
                   "name": "NO SUBDIVISION",
-                  "reasoning": "Task is simple and can be done in one day."
+                  "reasoning": "Sizing and shaping a garden is manageable in one day."
                 }
               ],
-              "name": "Add necessary amendments",
-              "reasoning": "Prepares soil for optimal conditions."
+              "name": "Determine the garden size and shape, considering the available space and sunlight.",
+              "reasoning": "Essential to plan plant placement."
             },
             {
               "children": [
                 {
-                  "name": "Till a section of the field manually",
-                  "reasoning": "This allows completion within one day."
-                },
-                {
-                  "name": "Use a machine to till remaining sections",
-                  "reasoning": "Efficient for larger areas in one day."
+                  "name": "NO SUBDIVISION",
+                  "reasoning": "Task can be completed in one day without splitting."
                 }
               ],
-              "name": "Till the soil",
-              "reasoning": "Ensures amendments are mixed thoroughly."
+              "name": "Select plants based on climate, soil type, and personal preference.",
+              "reasoning": "Critical for successful plant growth."
             }
           ],
-          "name": "Add necessary amendments and till the soil.",
-          "reasoning": "Correct soil composition and aeration."
+          "name": "Plan the garden layout",
+          "reasoning": "Involves logistics and planning, can be completed in one day."
         }
       ],
-      "name": "Prepare the soil",
-      "reasoning": "Ensure the land is ready to support the new plants by testing soil pH and nutrients, and adding compost or fertilizers as needed."
+      "name": "Design and plan the garden layout",
+      "reasoning": "Organize where each type of plant will go to ensure a beautiful and functional garden space for the party."
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "name": "Loosen the soil by turning it over with a shovel or tiller.",
+                  "reasoning": "Can be completed in one session."
+                }
+              ],
+              "name": "Loosen the soil by turning it over with a shovel or tiller.",
+              "reasoning": "Preparing soil involves more than just loosening."
+            },
+            {
+              "children": [
+                {
+                  "name": "Mix in compost",
+                  "reasoning": "Mixing compost requires physical labor and time."
+                },
+                {
+                  "name": "Level the surface",
+                  "reasoning": "Leveling requires attention to detail after mixing."
+                }
+              ],
+              "name": "Mix in compost and level the surface for planting.",
+              "reasoning": "Soil must be enriched and leveled for planting."
+            }
+          ],
+          "name": "Prepare the soil",
+          "reasoning": "Soil preparation is a major task, needing a full day."
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "name": "Clear the area of weeds and debris",
+                  "reasoning": "Clearing is essential before soil preparation."
+                },
+                {
+                  "name": "Till the soil and add compost",
+                  "reasoning": "Improves soil texture and nutrient content."
+                }
+              ],
+              "name": "Prepare the garden soil",
+              "reasoning": "Requires clearing and tilling the garden bed."
+            },
+            {
+              "children": [
+                {
+                  "name": "Prepare the soil and area for planting seeds or seedlings",
+                  "reasoning": "Preparing the soil ensures proper seed growth."
+                },
+                {
+                  "name": "Plant the seeds or seedlings",
+                  "reasoning": "Actual planting of seeds or seedlings is needed."
+                }
+              ],
+              "name": "Plant the seeds or seedlings",
+              "reasoning": "Involve selecting suitable plants and organizing their placement."
+            }
+          ],
+          "name": "Plant the garden",
+          "reasoning": "Without prepared soil, planting is ineffective."
+        }
+      ],
+      "name": "Prepare the soil and plant the garden",
+      "reasoning": "To give your plants the best chance of success, ensure the soil is suitable and plant your chosen plants according to their needs."
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "name": "Assess the garden's overall health.",
+                  "reasoning": "Evaluation requires checking plant health and soil moisture."
+                },
+                {
+                  "name": "Note which areas need attention.",
+                  "reasoning": "Identifying specific issues requires focused assessment of each area."
+                }
+              ],
+              "name": "Assess the garden's overall health and note which areas need attention.",
+              "reasoning": "Evaluate current garden condition before specific tasks."
+            },
+            {
+              "children": [
+                {
+                  "name": "Watering, pruning, and weeding",
+                  "reasoning": "These tasks are manageable within a single day."
+                }
+              ],
+              "name": "Create a daily schedule outline for tasks such as watering, pruning, and weeding.",
+              "reasoning": "Break down the schedule into manageable daily tasks."
+            }
+          ],
+          "name": "Design a weekly garden maintenance schedule",
+          "reasoning": "Planning ensures all garden tasks are manageable."
+        },
+        {
+          "children": [
+            {
+              "name": "NO SUBDIVISION",
+              "reasoning": "Task can fit into one day schedule."
+            }
+          ],
+          "name": "Assign specific tasks to each day",
+          "reasoning": "Allocation of tasks prevents overloading any single day."
+        }
+      ],
+      "name": "Implement a garden maintenance schedule",
+      "reasoning": "Regular watering, weeding, and other care will help your plants grow strong and healthy in time for the party."
     },
     {
       "children": [
         {
           "name": "NO SUBDIVISION",
-          "reasoning": "Single-step task, designing layout can be done in a day."
+          "reasoning": "Task is straightforward and can be completed in a day."
         }
       ],
-      "name": "Design the garden layout",
-      "reasoning": "Plan where each type of plant will go to create a visually appealing space optimal for the party's aesthetics."
+      "name": "Plan the party specifics",
+      "reasoning": "Organize details such as food, entertainment, and decorations well in advance to ensure a stress-free party experience."
     },
     {
       "children": [
@@ -165,72 +315,68 @@
             {
               "children": [
                 {
-                  "name": "Research seed vendors",
-                  "reasoning": "Different vendors offer different seeds, requiring separate assessment."
-                },
-                {
-                  "name": "Research types of seeds needed",
-                  "reasoning": "Selecting the right seeds depends on specific needs and conditions."
+                  "name": "Select a date for the party",
+                  "reasoning": "Simple decision, no subdivision needed."
                 }
               ],
-              "name": "Research seed vendors and types of seeds needed.",
-              "reasoning": "Identifying suitable options is essential."
-            },
-            {
-              "children": [
-                {
-                  "name": "Research the availability and pricing of the selected seeds online and create an order if feasible.",
-                  "reasoning": "Research ensures best pricing and availability online."
-                },
-                {
-                  "name": "Visit local stores to check availability and purchase the selected seeds if reasonable.",
-                  "reasoning": "Physical inspection and purchase if online options are insufficient."
-                }
-              ],
-              "name": "Purchase the selected seeds online or in-store.",
-              "reasoning": "Finalizes the acquisition process."
+              "name": "Select a date for the party",
+              "reasoning": "Picking a date is simple and doesn't need a subdivision."
             }
           ],
-          "name": "Purchase seeds",
-          "reasoning": "Seed and plant purchases can be separate."
+          "name": "Select a date for the party",
+          "reasoning": "Cannot invite without a date."
         },
         {
           "children": [
             {
               "children": [
                 {
-                  "name": "Identify the climate and space intended for planting, including size, sunlight, and soil type.",
-                  "reasoning": "Understanding constraints is essential before researching suitable plants."
+                  "name": "Determine the event date requirements and constraints",
+                  "reasoning": "Identifying constraints is essential for scheduling."
                 },
                 {
-                  "name": "Research plants that thrive in the identified climate and space conditions.",
-                  "reasoning": "Only specific plants suit certain climates and spaces."
+                  "name": "Select an appropriate date based on the requirements",
+                  "reasoning": "Necessary to match the criteria for the event."
                 }
               ],
-              "name": "Research different types of plants suitable for the intended space and climate.",
-              "reasoning": "Choosing the right plants requires research."
+              "name": "Set the date for the event.",
+              "reasoning": "It is necessary to determine when the event will take place."
             },
             {
               "children": [
                 {
-                  "name": "Go to the store or order plants online.",
-                  "reasoning": "Choosing plants is a distinct task."
+                  "name": "Collect guests' contact information.",
+                  "reasoning": "Contact info is essential to send invitations."
                 },
                 {
-                  "name": "Arrange for delivery of plants.",
-                  "reasoning": "Delivery logistics is a separate task."
+                  "name": "Prepare and send the invitations.",
+                  "reasoning": "Completing both tasks ensures successful invitation sending."
                 }
               ],
-              "name": "Go to the store or order plants online and arrange for delivery.",
-              "reasoning": "Purchasing requires physical or online shopping."
+              "name": "Send invitations to the guests.",
+              "reasoning": "Invitations should only be sent after the date is set."
             }
           ],
-          "name": "Purchase plants",
-          "reasoning": "Seed and plant purchases can be separate."
+          "name": "Send invitations immediately after setting the date",
+          "reasoning": "Ensure invitations are sent two months prior."
         }
       ],
-      "name": "Purchase seeds and plants",
-      "reasoning": "Acquire the necessary seeds and plants based on your research and garden design to ensure timely planting."
+      "name": "Send out invitations at least two months prior to the party",
+      "reasoning": "This gives your guests ample time to plan and RSVP."
+    },
+    {
+      "children": [
+        {
+          "name": "NO SUBDIVISION",
+          "reasoning": "Monitoring can be done in one day."
+        }
+      ],
+      "name": "Monitor garden progress",
+      "reasoning": "Keep an eye on plant growth and make adjustments to care as needed to ensure the garden is in perfect shape for the party."
+    },
+    {
+      "name": "Confirm party arrangements two weeks prior",
+      "reasoning": "Double-check all plans, supplies, and services to ensure everything is on track for the big day."
     },
     {
       "children": [
@@ -239,324 +385,54 @@
             {
               "children": [
                 {
-                  "name": "Remove weeds and debris",
-                  "reasoning": "Essential to start with clear soil."
+                  "name": "Clean the location",
+                  "reasoning": "Necessary to ensure a tidy space."
                 },
                 {
-                  "name": "Loosen the soil with a shovel",
-                  "reasoning": "Necessary for better root growth and drainage."
+                  "name": "Set up chairs and tables",
+                  "reasoning": "Essential for proper seating and arrangement."
                 }
               ],
-              "name": "Prepare the soil",
-              "reasoning": "Clear, tillage and fertilization require focused efforts."
+              "name": "Prepare the location.",
+              "reasoning": "Specific venue preparation can be a day's task."
             },
             {
               "children": [
                 {
-                  "name": "Plant the seeds or seedlings",
-                  "reasoning": "This task can naturally be executed as a single action in one day."
+                  "name": "Arrange food",
+                  "reasoning": "Complex task, needs coordination and planning."
+                },
+                {
+                  "name": "Send out invitations",
+                  "reasoning": "Complex task, involves drafting and sending."
                 }
               ],
-              "name": "Plant the seeds or seedlings",
-              "reasoning": "Each type requires separate handling and care."
+              "name": "Arrange food and send out invitations.",
+              "reasoning": "Coordinating catering and invitations can be completed together in a day."
             }
           ],
-          "name": "Plant the garden",
-          "reasoning": "Preparation and soil work needed."
-        },
-        {
-          "children": [
-            {
-              "name": "NO SUBDIVISION",
-              "reasoning": "The task can be completed within one day without needing subdivisions."
-            }
-          ],
-          "name": "Maintain the garden",
-          "reasoning": "Requires ongoing care and monitoring."
-        }
-      ],
-      "name": "Plant and maintain the garden",
-      "reasoning": "Plant the seeds or young plants at the optimal time for them to grow and flourish by next June, providing consistent care, watering, and pest control as needed."
-    },
-    {
-      "children": [
-        {
-          "children": [
-            {
-              "name": "NO SUBDIVISION",
-              "reasoning": "Plant growth can be monitored in a single day."
-            }
-          ],
-          "name": "Monitor plant growth",
-          "reasoning": "Simple observation task, no subdivision needed."
-        }
-      ],
-      "name": "Monitor plant growth",
-      "reasoning": "Regularly check the progress of the plants to ensure they are healthy and maturing as expected."
-    },
-    {
-      "children": [
-        {
-          "children": [
-            {
-              "name": "NO SUBDIVISION",
-              "reasoning": "Selecting a date and time is a single decision activity."
-            }
-          ],
-          "name": "Choose a date and time for the party.",
-          "reasoning": "Selecting a date sets the foundation for planning."
+          "name": "Prepare the location, food, and invitations for the party.",
+          "reasoning": "Task requires setup prior to enjoying the party."
         },
         {
           "children": [
             {
               "children": [
                 {
-                  "name": "Research suitable venues online and shortlist them.",
-                  "reasoning": "Finding options first is crucial before finalizing a booking."
-                },
-                {
-                  "name": "Contact the shortlisted venues to check availability and pricing.",
-                  "reasoning": "Checking availability ensures the venue can be reserved for your date."
+                  "name": "Enjoy the party with guests",
+                  "reasoning": "A party with guests is a single, cohesive event"
                 }
               ],
-              "name": "Book the venue",
-              "reasoning": "Booking a venue and catering each require distinct actions."
-            },
-            {
-              "children": [
-                {
-                  "name": "Decide on catering menu and budget",
-                  "reasoning": "Initial step to define needs"
-                },
-                {
-                  "name": "Contact catering services for quotes",
-                  "reasoning": "Gather options and pricing"
-                }
-              ],
-              "name": "Arrange catering",
-              "reasoning": "Booking a venue and catering each require distinct actions."
+              "name": "Enjoy the party with guests",
+              "reasoning": "This can be accomplished in one day."
             }
           ],
-          "name": "Book the venue and arrange catering.",
-          "reasoning": "Essential logistics ensure the party can happen smoothly."
+          "name": "Enjoy the party with guests.",
+          "reasoning": "Celebration takes place after preparations are done."
         }
       ],
-      "name": "Organize party logistics",
-      "reasoning": "Plan party details such as invitations, food, decorations, and entertainment well in advance to align with the blooming garden setting."
-    },
-    {
-      "children": [
-        {
-          "children": [
-            {
-              "children": [
-                {
-                  "name": "Compile a list of companies to research.",
-                  "reasoning": "Task requires gathering information and planning."
-                },
-                {
-                  "name": "Conduct detailed research on each company.",
-                  "reasoning": "In-depth examination of each company's data."
-                }
-              ],
-              "name": "Research companies online",
-              "reasoning": "Gather initial list of local party rental companies."
-            },
-            {
-              "children": [
-                {
-                  "name": "Verify contact information",
-                  "reasoning": "Task requires validation of different contact details."
-                },
-                {
-                  "name": "Verify services offered",
-                  "reasoning": "Task involves checking service information against records."
-                }
-              ],
-              "name": "Verify contact information and services",
-              "reasoning": "Ensure accuracy and details of the companies."
-            }
-          ],
-          "name": "Research and list local party rental companies.",
-          "reasoning": "To find suitable options for rentals."
-        },
-        {
-          "children": [
-            {
-              "children": [
-                {
-                  "name": "Search and compile a list of promising companies.",
-                  "reasoning": "Identification of companies requires time and cannot be finalized in one day."
-                },
-                {
-                  "name": "Gather contact details of shortlisted companies.",
-                  "reasoning": "Collecting accurate contact information requires additional attention separately."
-                }
-              ],
-              "name": "Compile a list of shortlisted companies with contact details.",
-              "reasoning": "Need company details for contacting."
-            },
-            {
-              "children": [
-                {
-                  "name": "Research and list companies to contact.",
-                  "reasoning": "Identify target companies to inquire."
-                },
-                {
-                  "name": "Contact each company about availability and pricing.",
-                  "reasoning": "Reach out to each listed company."
-                }
-              ],
-              "name": "Contact each company to inquire about availability and pricing.",
-              "reasoning": "Essential to acquire the required information."
-            }
-          ],
-          "name": "Contact shortlisted companies for availability and pricing.",
-          "reasoning": "To book services within the budget."
-        }
-      ],
-      "name": "Secure party rentals and services",
-      "reasoning": "Arrange for any necessary rentals like tents, chairs, tables, and possibly catering or entertainment services."
-    },
-    {
-      "children": [
-        {
-          "children": [
-            {
-              "children": [
-                {
-                  "name": "Select a theme and a harmonious color palette for it, ensuring visual consistency.",
-                  "reasoning": "Task can be completed within one day."
-                }
-              ],
-              "name": "Select a theme and color palette",
-              "reasoning": "Essential to guide all decoration choices."
-            },
-            {
-              "children": [
-                {
-                  "name": "Purchase decorations",
-                  "reasoning": "Buying items is a single-day task."
-                },
-                {
-                  "name": "Arrange decorations",
-                  "reasoning": "Setting up can be done in one day."
-                }
-              ],
-              "name": "Purchase and arrange decorations",
-              "reasoning": "Executes the actual decoration plan at the venue."
-            }
-          ],
-          "name": "Decorate the venue",
-          "reasoning": "Finalizing decorations requires focused attention."
-        },
-        {
-          "children": [
-            {
-              "children": [
-                {
-                  "name": "NO SUBDIVISION",
-                  "reasoning": "The task is simple and can be completed in one day."
-                }
-              ],
-              "name": "Confirm venue booking",
-              "reasoning": "Ensures the location is secured."
-            },
-            {
-              "children": [
-                {
-                  "name": "Contact vendors to confirm availability and requirements.",
-                  "reasoning": "Initial coordination with vendors is crucial for planning."
-                },
-                {
-                  "name": "Arrange timeline and logistics for setup.",
-                  "reasoning": "Details need to be organized for successful setup."
-                }
-              ],
-              "name": "Coordinate with vendors for setup",
-              "reasoning": "Ensures all supplies and services are arranged."
-            }
-          ],
-          "name": "Finalize setup arrangements",
-          "reasoning": "Organizing the setup involves coordination and detail checks."
-        }
-      ],
-      "name": "Finalize decorations and setup",
-      "reasoning": "Ensure that all decorations, seating arrangements, and garden enhancements are ready for the party day."
-    },
-    {
-      "children": [
-        {
-          "children": [
-            {
-              "children": [
-                {
-                  "name": "Clear debris",
-                  "reasoning": "Clearing debris and removing weeds are separate tasks."
-                },
-                {
-                  "name": "Remove weeds",
-                  "reasoning": "Both tasks need different tools and approaches."
-                }
-              ],
-              "name": "Clear debris and remove weeds",
-              "reasoning": "Initial cleanup is necessary to prepare the area."
-            },
-            {
-              "children": [
-                {
-                  "name": "Level the surface",
-                  "reasoning": "Requires physical labor and attention to detail."
-                },
-                {
-                  "name": "Prepare the soil",
-                  "reasoning": "Involves different actions like tilling and fertilizing."
-                }
-              ],
-              "name": "Level the surface and prepare soil",
-              "reasoning": "Even and ready soil is essential for planting."
-            }
-          ],
-          "name": "Clean and prepare the garden area.",
-          "reasoning": "To ensure the area is tidy and ready for setup."
-        },
-        {
-          "children": [
-            {
-              "children": [
-                {
-                  "name": "Purchase balloons and tablecloths",
-                  "reasoning": "Both items are party-themed and can be easily purchased in a single trip."
-                },
-                {
-                  "name": "Purchase lights",
-                  "reasoning": "Lights may require visiting a specialized store or finding specific types online."
-                }
-              ],
-              "name": "Purchase party-themed items (e.g., balloons, tablecloths, lights).",
-              "reasoning": "Purchasing decorations requires planning and selection."
-            },
-            {
-              "children": [
-                {
-                  "name": "Arrange the plants, flowers, and decorative items according to the landscape design plan.",
-                  "reasoning": "Different types require different placements for aesthetic and practical purposes."
-                },
-                {
-                  "name": "Install garden lighting and arrange seating.",
-                  "reasoning": "Separating tasks allows focus on utility and aesthetic placement."
-                }
-              ],
-              "name": "Arrange the purchased items in the garden.",
-              "reasoning": "Physically decorating the garden involves setup and placement."
-            }
-          ],
-          "name": "Decorate the garden with party-themed items.",
-          "reasoning": "To create an appropriate party atmosphere."
-        }
-      ],
-      "name": "Set up garden for the party",
-      "reasoning": "Arrange the garden and venue based on the finalized design to provide a welcoming atmosphere for guests."
+      "name": "Host the party and enjoy!",
+      "reasoning": "After all the planning and preparation, it's time to celebrate and enjoy the beautiful garden and festivities with your guests."
     }
   ],
   "name": "Plan Birthday Party",
