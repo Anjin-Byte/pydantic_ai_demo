@@ -8,13 +8,13 @@ from anytree.exporter import JsonExporter
 
 
 from dotenv import load_dotenv
+
 load_dotenv()
 import os
+
 model = OpenAIModel(
     "gpt-4o",
-    provider=OpenAIProvider(
-        api_key=os.getenv("OPENAI_API_KEY")
-    ),
+    provider=OpenAIProvider(api_key=os.getenv("OPENAI_API_KEY")),
 )
 
 
@@ -30,7 +30,7 @@ class Simple(BaseModel):
 
 agent: Agent[None, Simple] = Agent(
     model,
-    result_type=Simple,  # type: ignore
+    result_type=Simple,
     system_prompt=(
         "You are a birthday party planner."
         "You specialize in giving step-by-step plans to accomplish the customer's birthday demands."
@@ -95,19 +95,20 @@ def subdivide_node(
             subdivide_node(child, depth + 1, max_depth)
 
 
-root = TaskNode("Plan Birthday Party")
+root = TaskNode("Birthday Party Tasks")
 
 for task in result.data.tasks:
     task_node = TaskNode(task.task, reasoning=task.reasoning, parent=root)
     subdivide_node(task_node, depth=0, max_depth=3)
 
 for pre, fill, node in RenderTree(root):
-    print(f"{pre}{node.name} | Reasoning: {node.reasoning}")
+    print(f"{pre}{node.name} | Reason: {node.reasoning}")
 
 exporter = JsonExporter(indent=2, sort_keys=True)
 json_str = exporter.export(root)
 
-with open("task_tree.json", "w") as file:
+path = "task_tree.json"
+with open(path, "w") as file:
     file.write(json_str)
 
-print("Task tree has been saved to task_tree.json")
+print(f"Task tree has been saved at {path}")
