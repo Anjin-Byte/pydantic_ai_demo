@@ -1,12 +1,9 @@
-from typing import Union
 from pydantic_ai.models.openai import OpenAIModel
 from pydantic_ai.providers.openai import OpenAIProvider
 from pydantic_ai import Agent
 from pydantic import BaseModel
 from anytree import Node, RenderTree
 from anytree.exporter import JsonExporter
-
-
 from dotenv import load_dotenv
 
 load_dotenv()
