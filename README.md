@@ -19,3 +19,6 @@ In the root directory of the project, create a file named `.env`.
    load_dotenv()  # Load variables from .env into the environment
    openai_api_key = os.getenv("OPENAI_API_KEY")
    ```
+
+# Demo @
+https://anjin-byte.github.io/pydantic_ai_demo/
