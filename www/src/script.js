@@ -4,80 +4,99 @@ import { linkHorizontal } from 'd3-shape';
 
 if (module.hot) {
     module.hot.accept();
-  }
-
-// Sample data mimicking anytree JSON output
-const data = {
-  "name": "Birthday Party Task",
-  "reasoning": "",
-  "children": [
-    {
-      "name": "Design the Garden Layout",
-      "reasoning": "A well-thought-out plan is needed...",
-      "children": [
-        {
-          "name": "NO SUBDIVISION",
-          "reasoning": "Garden layout design complexity is unknown."
-        }
-      ]
-    },
-    {
-      "name": "Choose Plants",
-      "reasoning": "Selecting the right plants is crucial...",
-      "children": [
-        {
-          "name": "NO SUBDIVISION",
-          "reasoning": "No time frame or plant type specified."
-        }
-      ]
-    },
-    {
-      "name": "Prepare the Soil",
-      "reasoning": "Proper soil preparation ensures nutrient-rich growth.",
-      "children": []
+}
+class JsonDataHandler {
+    constructor() {
+        this.data = null;
     }
-  ]
-};
 
-// Convert the nested JSON into a d3 hierarchy.
-const root = hierarchy(data);
+    loadFile(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    this.data = JSON.parse(e.target.result);
+                    resolve(this.data);
+                } catch (err) {
+                    reject(new Error("Error parsing JSON: " + err));
+                }
+            };
+            reader.onerror = () => {
+                reject(new Error("Error reading file"));
+            };
+            reader.readAsText(file);
+        });
+    }
 
-// Create a tree layout with specified dimensions.
-const treeLayout = tree().size([600, 900]);
-treeLayout(root);
+    getData() {
+        return this.data;
+    }
 
-// Select the SVG element and create a group with margins.
+    hasData() {
+        return this.data !== null;
+    }
+
+    clearData() {
+        this.data = null;
+    }
+}
+
+const jsonHandler = new JsonDataHandler();
 const svg = select("svg");
-const g = svg.append("g")
-             .attr("transform", "translate(40,40)");
+let root = hierarchy('');
 
-// Render links between nodes.
-const linkGenerator = linkHorizontal()
-                        .x(d => d.y)
-                        .y(d => d.x);
+document.getElementById("loadButton").addEventListener("click", () => {
+    document.getElementById("fileInput").click();
+});
 
-g.selectAll(".link")
-  .data(root.links())
-  .enter()
-  .append("path")
-  .attr("class", "link")
-  .attr("d", linkGenerator);
+document.getElementById("fileInput").addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
 
-// Render nodes.
-const node = g.selectAll(".node")
-              .data(root.descendants())
-              .enter()
-              .append("g")
-              .attr("class", "node")
-              .attr("transform", d => `translate(${d.y},${d.x})`);
+    jsonHandler.loadFile(file)
+        .then((data) => {
+            root = hierarchy(jsonHandler.getData());
+            console.log("Loaded JSON:", data);
+            renderTree(root, svg)
+        })
+        .catch((error) => {
+            console.error("Error parsing JSON:", error);
+        });
+});
 
-// Append a circle to each node.
-node.append("circle")
-    .attr("r", 5);
+function renderTree(root, svg) {
+    const treeLayout = tree().size([600, 900]);
+    treeLayout(root);
 
-// Append text to each node, displaying the node's name.
-node.append("text")
-    .attr("dy", 3)
-    .attr("x", d => d.children ? -10 : 10)
-    .style("text-anchor", d => d.children ? "end" : "start")
-    .text(d => d.data.name);
+    const g = svg.append("g")
+        .attr("transform", "translate(40,40)");
+
+    const linkGenerator = linkHorizontal()
+        .x(d => d.y)
+        .y(d => d.x);
+
+    g.selectAll(".link")
+        .data(root.links())
+        .enter()
+        .append("path")
+        .attr("class", "link")
+        .attr("d", linkGenerator);
+
+    const node = g.selectAll(".node")
+        .data(root.descendants())
+        .enter()
+        .append("g")
+        .attr("class", "node")
+        .attr("transform", d => `translate(${d.y},${d.x})`);
+
+    node.append("circle")
+        .attr("r", 5);
+
+    node.append("text")
+        .attr("dy", 3)
+        .attr("x", d => d.children ? -10 : 10)
+        .style("text-anchor", d => d.children ? "end" : "start")
+        .text(d => d.data.name);
+}
+
+renderTree(root, svg)
