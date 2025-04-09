@@ -18,14 +18,17 @@ model = OpenAIModel(
     provider=OpenAIProvider(api_key=os.getenv("OPENAI_API_KEY")),
 )
 
+
 class LessSimple(BaseModel):
     taskNum: int
     task: str
     reasoning: str
 
+
 class Simple(BaseModel):
     tasks: List[LessSimple]
-    
+
+
 class Specialist(BaseModel):
     name: str
     role: str
@@ -33,16 +36,18 @@ class Specialist(BaseModel):
     strengths: List[str]
     preferred_projects: List[str]
 
+
 class AllSpecialists(BaseModel):
     specialists: List[Specialist]
-    
+
+
 class LLMAssignabilityResponse(BaseModel):
     is_assignable: bool
-    assigned_specialist: Optional[str] 
+    assigned_specialist: Optional[str]
     can_be_done_in_one_day: bool
     reasoning: str
-    
-    
+
+
 assignability_agent: Agent[str, LLMAssignabilityResponse] = Agent(
     model,
     result_type=LLMAssignabilityResponse,
@@ -89,7 +94,7 @@ subdivision_agent: Agent[str, Simple] = Agent(
     system_prompt=(
         "You are an efficient day-planner. For a given task, determine if it can be accomplished in one day. "
         "If it can, respond with a single task that is exactly 'NO SUBDIVISION SUB_SYSTEM'. "
-        #"Do not be timid in ceasing to subdivide further. If you lack information or knowledge of context to know how long something will take, consider no subdivision." #experimental
+        # "Do not be timid in ceasing to subdivide further. If you lack information or knowledge of context to know how long something will take, consider no subdivision." #experimental
         "'reasoning' summary explaining why no subdivision is needed. If you lack information or knowledge of context to know how long something will take, take special care to explain this point."
         "If it cannot, break the task into exactly 2 sub-tasks, each of which can be accomplished in one day. "
         "Provide the result as a JSON object with the key 'tasks' mapping to a list of sub-task objects, "
@@ -137,13 +142,14 @@ for idx, spec in enumerate(specialists_result.data.specialists, start=0):
     print(f"  Background: {spec.background}")
     print(f"  Strengths: {spec.strengths}")
     print(f"  Preferred Projects: {spec.preferred_projects}")
-    
+
 specialists: List[Specialist] = specialists_result.data.specialists
+
 
 class DupCheckResponse(BaseModel):
     is_duplicate: bool
     reasoning: str
-    
+
 
 dup_check_agent: Agent[str, DupCheckResponse] = Agent(
     model,
@@ -159,16 +165,19 @@ dup_check_agent: Agent[str, DupCheckResponse] = Agent(
     ),
 )
 
+
 class TaskNode(Node):
     def __init__(self, name: str, reasoning: str = "", parent=None, **kwargs):
         super().__init__(name, parent=parent, **kwargs)
         self.reasoning = reasoning
+
 
 class TaskAssignabilityEvaluation(BaseModel):
     task: str
     is_assignable: bool = False
     assigned_specialist: Optional[str] = None
     reasoning: Optional[str] = None
+
 
 """ specialists = [
     Specialist(name="Cook", description="Expert in cooking."),
@@ -177,7 +186,10 @@ class TaskAssignabilityEvaluation(BaseModel):
     Specialist(name="Gardener", description="Expert in landscaping."),
 ] """
 
-def evaluate_assignability(task: str, specialists: List[Specialist]) -> TaskAssignabilityEvaluation:
+
+def evaluate_assignability(
+    task: str, specialists: List[Specialist]
+) -> TaskAssignabilityEvaluation:
     """
     Use an LLM to decide if exactly one specialist can handle the task
     AND whether the task can be completed in one day.
@@ -199,9 +211,10 @@ def evaluate_assignability(task: str, specialists: List[Specialist]) -> TaskAssi
         reasoning=(
             f"{llm_response.data.reasoning} "
             f"One-day feasibility: {llm_response.data.can_be_done_in_one_day}"
-        )
+        ),
     )
-    
+
+
 def is_repetitive(new_task: str, processed_tasks: List[str]) -> bool:
     """
     Uses the LLM to decide if 'new_task' is essentially the same
@@ -219,20 +232,19 @@ def is_repetitive(new_task: str, processed_tasks: List[str]) -> bool:
     response = dup_check_agent.run_sync(user_prompt)
     return response.data
 
-def subdivide_node(node: TaskNode, processed_tasks: List[str], depth: int = 0, max_depth: int = 3) -> None:
+
+def subdivide_node(
+    node: TaskNode, processed_tasks: List[str], depth: int = 0, max_depth: int = 3
+) -> None:
     if depth >= max_depth:
         return
 
     # check for repetitive tasks
     new_task_str = node.name.strip()
     is_rep = is_repetitive(new_task_str, processed_tasks)
-    
+
     if is_rep.is_duplicate:
-        TaskNode(
-            "IS REPETITIVE", 
-            reasoning=is_rep.reasoning,
-            parent=node
-        )
+        TaskNode("IS REPETITIVE", reasoning=is_rep.reasoning, parent=node)
         return
     else:
         processed_tasks.append(new_task_str)
@@ -254,14 +266,15 @@ def subdivide_node(node: TaskNode, processed_tasks: List[str], depth: int = 0, m
     tasks_data = response.data.tasks
 
     if len(tasks_data) == 1 and tasks_data[0].task.strip().upper() == "NO SUBDIVISION":
-        TaskNode(
-            tasks_data[0].task.strip().upper(),
-            reasoning=tasks_data[0].reasoning,
-            parent=node
-        )
+        force_specialist_assign = evaluate_assignability(node.name, specialists)
+        if force_specialist_assign.is_assignable:
+            assigned_label = f"ASSIGNED: {evaluation.assigned_specialist}"
+            TaskNode(assigned_label, reasoning=evaluation.reasoning, parent=node)
     else:
         for subtask_obj in tasks_data:
-            child_node = TaskNode(subtask_obj.task, reasoning=subtask_obj.reasoning, parent=node)
+            child_node = TaskNode(
+                subtask_obj.task, reasoning=subtask_obj.reasoning, parent=node
+            )
             subdivide_node(child_node, processed_tasks, depth + 1, max_depth)
 
 
