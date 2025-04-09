@@ -42,6 +42,7 @@ class LLMAssignabilityResponse(BaseModel):
     can_be_done_in_one_day: bool
     reasoning: str
     
+    
 assignability_agent: Agent[str, LLMAssignabilityResponse] = Agent(
     model,
     result_type=LLMAssignabilityResponse,
@@ -86,14 +87,15 @@ subdivision_agent: Agent[str, Simple] = Agent(
     model,
     result_type=Simple,
     system_prompt=(
-        "You are an efficient day-planner. For a given task, determine if it "
-        "can be accomplished in one day. A global context is provided in JSON "
-        "under 'processed_tasks', listing tasks handled in other branches. "
-        "If the current task or a similar one is already processed, respond "
-        "with a single task that is exactly 'NO SUBDIVISION' and reasoning. "
-        "If the task cannot be done in one day, break it into exactly 2 sub-tasks "
-        "that can each be completed in one day. Return a JSON object with key 'tasks' "
-        "mapping to a list of objects with keys 'taskNum', 'task', and 'reasoning'."
+        "You are an efficient day-planner. For a given task, determine if it can be accomplished in one day. "
+        "If it can, respond with a single task that is exactly 'NO SUBDIVISION SUB_SYSTEM'. "
+        #"Do not be timid in ceasing to subdivide further. If you lack information or knowledge of context to know how long something will take, consider no subdivision." #experimental
+        "'reasoning' summary explaining why no subdivision is needed. If you lack information or knowledge of context to know how long something will take, take special care to explain this point."
+        "If it cannot, break the task into exactly 2 sub-tasks, each of which can be accomplished in one day. "
+        "Provide the result as a JSON object with the key 'tasks' mapping to a list of sub-task objects, "
+        "each having 'taskNum' and 'task'. "
+        "'reasoning' field (no more than 20 words) that explains why the sub-task is necessary. "
+        "Return the result as JSON with a key 'tasks' mapping to a list of objects."
     ),
 )
 
@@ -138,6 +140,25 @@ for idx, spec in enumerate(specialists_result.data.specialists, start=0):
     
 specialists: List[Specialist] = specialists_result.data.specialists
 
+class DupCheckResponse(BaseModel):
+    is_duplicate: bool
+    reasoning: str
+    
+
+dup_check_agent: Agent[str, DupCheckResponse] = Agent(
+    model,
+    result_type=DupCheckResponse,
+    system_prompt=(
+        "You are a duplication detection system. "
+        "You receive a list of tasks that have already been processed, and a new task. "
+        "You must decide if the new task is effectively the 'same' or 'too similar' to any of the old tasks.\n\n"
+        "You MUST return valid JSON with exactly:\n"
+        "  is_duplicate (bool)\n"
+        "  reasoning (str)\n"
+        "No additional keys.\n"
+    ),
+)
+
 class TaskNode(Node):
     def __init__(self, name: str, reasoning: str = "", parent=None, **kwargs):
         super().__init__(name, parent=parent, **kwargs)
@@ -180,24 +201,41 @@ def evaluate_assignability(task: str, specialists: List[Specialist]) -> TaskAssi
             f"One-day feasibility: {llm_response.data.can_be_done_in_one_day}"
         )
     )
-
-def subdivide_node(node: TaskNode, global_context: Set[str], depth: int = 0, max_depth: int = 3) -> None:
+    
+def is_repetitive(new_task: str, processed_tasks: List[str]) -> bool:
     """
-      1) Checks if the task is already in global_context => 'NO SUBDIVISION' if so.
-      2) Checks if the task can be assigned to a single specialist => mark as assigned if yes.
-      3) Otherwise calls subdivision_agent to see if we subdivide or not.
+    Uses the LLM to decide if 'new_task' is essentially the same
+    as any of the tasks in 'processed_tasks.'
     """
+    # Build a JSON prompt for the LLM
+    tasks_json = json.dumps(list(processed_tasks), indent=2)
+    user_prompt = (
+        f"Already Processed Tasks:\n{tasks_json}\n\n"
+        f"New Task:\n{new_task}\n\n"
+        "Decide if the new task is a near-duplicate or effectively the same "
+        "as any of the old tasks."
+    )
 
+    response = dup_check_agent.run_sync(user_prompt)
+    return response.data
+
+def subdivide_node(node: TaskNode, processed_tasks: List[str], depth: int = 0, max_depth: int = 3) -> None:
     if depth >= max_depth:
         return
 
-    # check if task is repetitive
-    normalized_task = node.name.strip().lower()
-    if normalized_task in global_context:
-        TaskNode("NO SUBDIVISION", reasoning="Duplicate task. No further action needed.", parent=node)
+    # check for repetitive tasks
+    new_task_str = node.name.strip()
+    is_rep = is_repetitive(new_task_str, processed_tasks)
+    
+    if is_rep.is_duplicate:
+        TaskNode(
+            "IS REPETITIVE", 
+            reasoning=is_rep.reasoning,
+            parent=node
+        )
         return
     else:
-        global_context.add(normalized_task)
+        processed_tasks.append(new_task_str)
 
     # check if task is assignable
     evaluation = evaluate_assignability(node.name, specialists)
@@ -207,12 +245,10 @@ def subdivide_node(node: TaskNode, global_context: Set[str], depth: int = 0, max
         return
 
     # check if it can be done in one day or needs subdivision
-    context_dict = {
-        "processed_tasks": list(global_context)
-    }
+    context_dict = {"processed_tasks": processed_tasks}
     prompt = (
-        f"{{global_context}}: {json.dumps(context_dict)}\n"
-        f"Current Task: {node.name}"
+        f"{{global_context}}: {json.dumps(context_dict, indent=2)}\n"
+        f"Current Task: {new_task_str}"
     )
     response = subdivision_agent.run_sync(prompt)
     tasks_data = response.data.tasks
@@ -226,11 +262,11 @@ def subdivide_node(node: TaskNode, global_context: Set[str], depth: int = 0, max
     else:
         for subtask_obj in tasks_data:
             child_node = TaskNode(subtask_obj.task, reasoning=subtask_obj.reasoning, parent=node)
-            subdivide_node(child_node, global_context, depth + 1, max_depth)
+            subdivide_node(child_node, processed_tasks, depth + 1, max_depth)
 
 
 root = TaskNode("Birthday Party Tasks")
-global_context_set = set()
+global_context_set = list()
 
 for t in result.data.tasks:
     task_node = TaskNode(t.task, reasoning=t.reasoning, parent=root)
